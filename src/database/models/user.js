@@ -15,16 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-    //static a = password == "";
-    //static #encrypt = (password) => bcrypt.hashSync (password, 10)
-    
-    static register = ({ fullname, username, email, password }) => {
-      console.log(fullname)
-      //const encryptedPassword = this.#encrypt(password)
-      
-      return this.create({ fullname, username, email, password //: encryptedPassword
-      })
-    }
   }
   User.init({
     fullname: DataTypes.STRING,
