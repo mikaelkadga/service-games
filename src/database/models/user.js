@@ -3,8 +3,6 @@ const {
   Model
 } = require('sequelize');
 
-const bcrypt = require('bcrypt' )
-
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -18,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init({
     fullname: DataTypes.STRING,
-    username: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    totalPoint: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'User',
