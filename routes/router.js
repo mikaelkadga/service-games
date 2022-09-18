@@ -1,9 +1,7 @@
-"use strict";
+const router = require('express' ).Router()
 
-const { listController } = require("../api/controller");
+const authController = require("../api/controller/authController");
 
-const router = require("express").Router();
-
-router.get("/", listController);
+router.post('/api/v1/auth/register', authController.register)
 
 module.exports = router;

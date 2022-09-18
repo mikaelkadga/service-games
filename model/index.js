@@ -1,5 +1,5 @@
 "use strict";
 
 module.exports = {
-  // Model: require("./model"),
+   User: require("./model"),
 };

@@ -1,5 +1,5 @@
-const { model } = require("../../model");
+const { models } = require("../../models");
 
-module.exports = async () => {
-  return await model.find();
-};
+module.exports = {
+  models
+}
