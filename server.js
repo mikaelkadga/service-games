@@ -1,16 +1,21 @@
-"use strict";
+const express = require('express')
+const app = express()
+const PORT = process.env.PORT || 8000
 
-const http = require("http");
-const { port } = require("./config/env");
-const app = require("./config/express");
+app.use(express.urlencoded({ extended: false }))
 
-const server = http.createServer(app);
+app.set('view engine', 'ejs')
+const userRouter = require("./src/user/user.route");
 
-server.listen(port);
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 
-server.on("listening", () => {
-  //Connect();
-  console.log("Server is up and listening on port : " + port);
-});
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
 
-module.exports = server;
+app.use(userRouter);
+
+app.listen(PORT, () => {
+    console.log(`Server is up and running on port : ${PORT}`)
+})
