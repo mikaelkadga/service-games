@@ -1,12 +1,11 @@
 const { json } = require("body-parser");
 const { User } = require("../database/models");
 
-const createUser = async ({ username, fullname, email, password }) => {
+const createUser = async ({ fullName, email, password }) => {
   const isUserExists = await User.findOne({ where: { email }, raw: true });
   if (!isUserExists) {
     return await User.create({
-      username,
-      fullname,
+      fullName,
       email,
       password,
     });
