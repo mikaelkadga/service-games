@@ -79,4 +79,17 @@ userRouter.post(
   userController.createUser
 );
 
+userRouter.get(
+  "/user/",
+  tokenVerification,
+  userController.getUserProfile
+);
+
+userRouter.put(
+  "/user/",
+  tokenVerification,
+  validation(checkSchema(schemas.updateUser)),
+  userController.updateUser
+)
+
 module.exports = userRouter;
