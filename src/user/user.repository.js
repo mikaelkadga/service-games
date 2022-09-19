@@ -9,8 +9,8 @@ const createUser = async ({ fullName, email, password }) => {
       email,
       password,
     });
-  }else {
-    return json({ message: error.message});
+  } else {
+    return json({ message: error.message });
   }
 };
 
@@ -18,14 +18,36 @@ const getUser = async ({ username }) => {
   return await User.findOne({ where: { username }, raw: true });
 };
 
-const getUserEmail = async ({email}) => {
-  return await User.findOne({where: {email}, raw: true});
-}
+const getUserEmail = async ({ email }) => {
+  return await User.findOne({ where: { email }, raw: true });
+};
+
+const getUserProfile = async ({ userId }) => {
+  return await User.findOne({ where: { userId }, raw: true });
+};
+
+const updateUser = async ({ userId, fullName, email, password }) => {
+  return await User.update(
+    {
+      fullName,
+      email,
+      password,
+    },
+    {
+      where: {
+        id: userId,
+      },
+      returning: true,
+    }
+  );
+};
 
 const userRepository = {
   createUser,
   getUser,
   getUserEmail,
+  getUserProfile,
+  updateUser,
 };
 
 module.exports = userRepository;
