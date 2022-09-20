@@ -1,11 +1,11 @@
 const { json } = require("body-parser");
 const { User } = require("../database/models");
 
-const createUser = async ({ fullName, email, password }) => {
+const createUser = async ({ fullname, email, password }) => {
   const isUserExists = await User.findOne({ where: { email }, raw: true });
   if (!isUserExists) {
     return await User.create({
-      fullName,
+      fullname,
       email,
       password,
     });
@@ -14,8 +14,8 @@ const createUser = async ({ fullName, email, password }) => {
   }
 };
 
-const getUser = async ({ username }) => {
-  return await User.findOne({ where: { username }, raw: true });
+const getUser = async ({ userId }) => {
+  return await User.findOne({ where: { userId }, raw: true });
 };
 
 const getUserEmail = async ({ email }) => {
@@ -26,10 +26,10 @@ const getUserProfile = async ({ userId }) => {
   return await User.findOne({ where: { userId }, raw: true });
 };
 
-const updateUser = async ({ userId, fullName, email, password }) => {
+const updateUser = async ({ userId, fullname, email, password }) => {
   return await User.update(
     {
-      fullName,
+      fullname,
       email,
       password,
     },
