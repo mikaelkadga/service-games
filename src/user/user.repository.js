@@ -1,11 +1,11 @@
 const { json } = require("body-parser");
 const { User } = require("../database/models");
 
-const createUser = async ({ fullName, email, password }) => {
+const createUser = async ({ fullname, email, password }) => {
   const isUserExists = await User.findOne({ where: { email }, raw: true });
   if (!isUserExists) {
     return await User.create({
-      fullName,
+      fullname,
       email,
       password,
     });
@@ -14,28 +14,23 @@ const createUser = async ({ fullName, email, password }) => {
   }
 };
 
-const getUser = async ({ username }) => {
-  return await User.findOne({ where: { username }, raw: true });
-};
-
-const getUserEmail = async ({ email }) => {
+const getUser = async ({ email }) => {
   return await User.findOne({ where: { email }, raw: true });
 };
 
-const getUserProfile = async ({ userId }) => {
-  return await User.findOne({ where: { userId }, raw: true });
+const getUserProfile = async ({ email }) => {
+  return await User.findOne({ where: { email }, raw: true });
 };
 
-const updateUser = async ({ userId, fullName, email, password }) => {
+const updateUser = async ({ fullname, password }) => {
   return await User.update(
     {
-      fullName,
-      email,
+      fullname,
       password,
     },
     {
       where: {
-        id: userId,
+        email: email,
       },
       returning: true,
     }
@@ -45,7 +40,6 @@ const updateUser = async ({ userId, fullName, email, password }) => {
 const userRepository = {
   createUser,
   getUser,
-  getUserEmail,
   getUserProfile,
   updateUser,
 };

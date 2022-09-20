@@ -1,24 +1,11 @@
 const userRepo = require("../user/user.repository");
 
 const registrationSchema = {
-  username:{
-    isString: true,
-    custom: {
-        options: async (value) => {
-          const user = await userRepo.getUser({
-            username: value,
-          });
-          if (user) {
-            return Promise.reject("Username telah digunakan oleh user lain.");
-          }
-        },
-      },
-  },
   email: {
     isString: true,
     custom: {
       options: async (value) => {
-        const user = await userRepo.getUserEmail({
+        const user = await userRepo.getUser({
           email: value,
         });
         if (user) {
@@ -42,12 +29,7 @@ const registrationSchema = {
 };
 
 const updateUser = {
-  username: {
-    isString: true,
-    notEmpty: true,
-    errorMessage: "Username must not be empty",
-  },
-  fullName: {
+  fullname: {
     isString: true,
     notEmpty: true,
     errorMessage: "Fullname must not be empty",
