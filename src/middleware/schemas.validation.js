@@ -41,8 +41,32 @@ const registrationSchema = {
   },
 };
 
+const updateUser = {
+  username: {
+    isString: true,
+    notEmpty: true,
+    errorMessage: "Username must not be empty",
+  },
+  fullName: {
+    isString: true,
+    notEmpty: true,
+    errorMessage: "Fullname must not be empty",
+  },
+  email: {
+    isString: true,
+    notEmpty: true,
+    errorMessage: "Email must not be empty",
+  },
+  password: {
+    isString: true,
+    notEmpty: true,
+    errorMessage: "Password must not be empty",
+  },
+};
+
 const schemas = {
-  registrationSchema
+  registrationSchema,
+  updateUser
 };
 
 module.exports = schemas;
