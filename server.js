@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 8000;
 const path = require("path");
 const userRouter = require("./src/user/user.route");
 const authRouter = require("./src/auth/auth.route");
+const leaderboardRouter = require('./src/leaderboard/leaderboard.route');
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(userRouter);
 app.use(authRouter);
+app.use(leaderboardRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);
