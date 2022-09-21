@@ -1,8 +1,16 @@
 const userRepo = require("../user/user.repository");
 
 const registrationSchema = {
+  fullname: {
+    isString: true,
+    notEmpty: true,
+    errorMessage:
+      "Fullname must not be empty",
+  },
   email: {
     isString: true,
+    isEmail: true,
+    notEmpty: true,
     custom: {
       options: async (value) => {
         const user = await userRepo.getUserEmail({
@@ -13,9 +21,11 @@ const registrationSchema = {
         }
       },
     },
+    errorMessage: "Email must not be empty",
   },
   password: {
     isString: true,
+    notEmpty: true,
     isStrongPassword: {
       minLength: 8,
       minLowercase: 1,
@@ -31,10 +41,12 @@ const registrationSchema = {
 const loginSchema = {
   email: {
     isString: true,
+    notEmpty: true,
     errorMessage: "Email must not be empty",
   },
   password: {
     isString: true,
+    notEmpty: true,
     errorMessage: "Password must not be empty",
   },
 };
