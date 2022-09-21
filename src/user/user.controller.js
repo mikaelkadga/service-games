@@ -2,10 +2,10 @@ const { getUser } = require("./user.repository");
 const userService = require("./user.service");
 
 const createUser = async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { fullname, email, password } = req.body;
   try {
     const newUser = await userService.createUser({
-      fullName,
+      fullname,
       email,
       password,
     });
@@ -30,11 +30,11 @@ const getUserProfile = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const userId = req.auth.id;
-  const { fullName, email, password } = req.body;
+  const { fullname, email, password } = req.body;
   try {
     const updateDataUser = await userService.updateUser({
       userId,
-      fullName,
+      fullname,
       email,
       password,
     });
