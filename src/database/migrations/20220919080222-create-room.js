@@ -1,4 +1,7 @@
 'use strict';
+
+const roomUtils = require("../../room/room.utils");
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Rooms', {
@@ -12,22 +15,30 @@ module.exports = {
         type: Sequelize.STRING
       },
       roomCode: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
+        defaultValue: function() {
+          return roomUtils.generateRoomCode();
+        },
       },
       hostUserId: {
         type: Sequelize.INTEGER
       },
       guestUserId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: true
       },
       hostScore: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       guestScore: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       isFinished: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
