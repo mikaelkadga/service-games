@@ -28,6 +28,17 @@ const registrationSchema = {
   },
 };
 
+const loginSchema = {
+  email: {
+    isString: true,
+    errorMessage: "Email must not be empty",
+  },
+  password: {
+    isString: true,
+    errorMessage: "Password must not be empty",
+  },
+};
+
 const updateUser = {
   fullname: {
     isString: true,
@@ -48,7 +59,8 @@ const updateUser = {
 
 const schemas = {
   registrationSchema,
-  updateUser
+  updateUser,
+  loginSchema
 };
 
 module.exports = schemas;

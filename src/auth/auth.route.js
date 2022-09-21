@@ -1,11 +1,10 @@
 const express = require("express")
 const authController = require("./auth.controller")
-// const { body, validationResult } = require("express-validator");
-const { loginValidation } = require("../middleware/auth.validation");
-const { validate } = require("../middleware/validate");
 const authRouter = express.Router()
+const validation = require("../middleware/validate");
+const { checkSchema } = require("express-validator");
 
-authRouter.post("/auth/login", loginValidation, validate, authController.login)
+authRouter.post("/auth/login",validation(checkSchema(schemas.loginSchema)), authController.login)
 
 /**
  * @swagger
