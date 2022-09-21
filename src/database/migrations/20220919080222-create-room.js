@@ -12,6 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       roomName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       roomCode: {
@@ -22,6 +23,7 @@ module.exports = {
         },
       },
       hostUserId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       guestUserId: {
