@@ -27,7 +27,7 @@ const login = async (req, res) => {
 
       // console.log(existUser)
       // console.log(token)
-      return res.json({accessToken: token});
+      return res.res.status(200).json({accessToken: token});
     } else {
       return res.send("Login failed");
     }

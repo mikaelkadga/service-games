@@ -3,6 +3,7 @@ const authController = require("./auth.controller")
 const authRouter = express.Router()
 const validation = require("../middleware/validate");
 const { checkSchema } = require("express-validator");
+const schemas = require("../middleware/schemas.validation");
 
 authRouter.post("/auth/login",validation(checkSchema(schemas.loginSchema)), authController.login)
 
