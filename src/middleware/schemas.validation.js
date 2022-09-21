@@ -9,6 +9,7 @@ const registrationSchema = {
   },
   email: {
     isString: true,
+    isEmail: true,
     notEmpty: true,
     custom: {
       options: async (value) => {
