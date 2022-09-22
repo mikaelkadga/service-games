@@ -13,11 +13,10 @@ const login = async (req, res) => {
     //   password checking
     const isPasswordCorrect = await bcrypt.compare(password, existUser.password);
     if (isPasswordCorrect) {
-
       // generating jwt
       const token = await jwt.sign(
         {
-          id: existUser.id,
+          id: existUser.userId,
           fullname: existUser.fullname,
           email: existUser.email
         },
