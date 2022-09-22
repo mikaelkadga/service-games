@@ -24,12 +24,9 @@ const login = async (req, res) => {
         process.env.JWT_SECRET_TOKEN,
         { expiresIn: "1d" }
       );
-
-      // console.log(existUser)
-      // console.log(token)
-      return res.res.status(200).json({accessToken: token});
+      return res.status(200).json({accessToken: token});
     } else {
-      return res.send("Login failed");
+      return res.status(500).json({msg: "Login failed"});
     }
   }
 
