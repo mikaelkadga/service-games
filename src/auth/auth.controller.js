@@ -13,11 +13,10 @@ const login = async (req, res) => {
     //   password checking
     const isPasswordCorrect = await bcrypt.compare(password, existUser.password);
     if (isPasswordCorrect) {
-
       // generating jwt
       const token = await jwt.sign(
         {
-          id: existUser.id,
+          id: existUser.userId,
           fullname: existUser.fullname,
           email: existUser.email
         },
@@ -25,9 +24,7 @@ const login = async (req, res) => {
         { expiresIn: "1d" }
       );
 
-      // console.log(existUser)
-      // console.log(token)
-      return res.res.status(200).json({accessToken: token});
+      return res.status(200).json({accessToken: token});
     } else {
       return res.send("Login failed");
     }
