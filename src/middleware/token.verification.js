@@ -8,7 +8,6 @@ const tokenVerification = async (req, res, next) => {
   if (!token) {
     return res.status(400).send("Missing Authorization header");
   }
-  console.log(token);
 
   try {
     // cek token dan masukkan data user dalam request

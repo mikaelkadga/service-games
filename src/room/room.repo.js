@@ -1,7 +1,10 @@
 const { Room } = require("../database/models");
 
 const findRoomWithCode = async ({ roomCode }) => {
-  return await Room.findOne({ where: { roomCode: roomCode } });
+  return await Room.findOne({
+      where: { roomCode: roomCode },
+    },
+  );
 };
 
 const createRoom = async ({ roomName, hostUserId }) => {
@@ -14,9 +17,19 @@ const createRoom = async ({ roomName, hostUserId }) => {
   });
 };
 
+const getAllRoom = async () => {
+  return await Room.findAll();
+};
+
+const findRoom = async (roomId) => {
+  return await Room.findByPk(roomId);
+};
+
 const roomRepo = {
   findRoomWithCode,
   createRoom,
+  getAllRoom,
+  findRoom,
 };
 
 module.exports = roomRepo;
