@@ -1,6 +1,12 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 8000
+const path = require('path');
+const cors = require("cors");
+const leaderboardRouter = require('./src/leaderboard/leaderboard.route');
+const userRouter = require("./src/user/user.route");
+const authRouter = require("./src/auth/auth.route");
+const roomRouter = require("./src/room/room.route")
 
 app.use(express.urlencoded({ extended: false }))
 
@@ -10,21 +16,18 @@ const swaggerDocument = require('./src/config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.set('view engine', 'ejs')
-const userRouter = require("./src/user/user.route");
-const authRouter = require("./src/auth/auth.route");
-const roomRouter = require("./src/room/room.route")
 
-var path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cors());
 app.use(userRouter);
 app.use(authRouter);
+app.use(leaderboardRouter)
 app.use(roomRouter)
 
 app.listen(PORT, () => {
-    console.log(`Server is up and running on port : ${PORT}`)
-})
+  console.log(`Server is up and running on port : ${PORT}`);
+});

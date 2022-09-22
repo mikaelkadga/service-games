@@ -5,7 +5,7 @@ const validation = require("../middleware/validate");
 const { checkSchema } = require("express-validator");
 const schemas = require("../middleware/schemas.validation");
 
-authRouter.post("/auth/login",validation(checkSchema(schemas.loginSchema)), authController.login)
+authRouter.post("/auth/login", validation(checkSchema(schemas.loginSchema)), authController.login)
 
 /**
  * @swagger
