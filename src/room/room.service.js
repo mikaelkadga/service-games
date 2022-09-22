@@ -16,8 +16,22 @@ const createRoom = async ({ roomName, hostUserId }) => {
   });
 };
 
+const getAllRoom = async () => {
+  return new Promise(async (resolve, reject) => {
+    const room = await roomRepo.getAllRoom();
+    if (room) {
+      resolve(room);
+    } else {
+      const error = new Error("Unknown Error");
+      error.code = 500;
+      reject(error);
+    }
+  });
+};
+
 const roomService = {
   createRoom,
+  getAllRoom,
 };
 
 module.exports = roomService;
