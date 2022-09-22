@@ -8,12 +8,12 @@ const roomSchemas = require("../middleware/room.schemas.validation");
 
 /**
  * @swagger
- *  /post/create:
+ *  /room/create:
  *    post:
  *      security:
  *        - bearerAuth: []
  *      summary: Create a room
- *      description: This API will create a new room with an empty guestUserId (the opponent' id). You only need to provide a roomCode, the remaining values will be automatically assigned. If success, you will receive the room's code
+ *      description: This API will create a new room with an empty guestUserId (the opponent's id). You only need to provide a roomCode, the remaining values will be automatically assigned. If success, you will receive the room's code
  *      tags:
  *        - Room
  *      requestBody:
@@ -59,10 +59,10 @@ const roomSchemas = require("../middleware/room.schemas.validation");
  *                example: roomName must be a string and not empty
  */
 roomRouter.post(
-  "/create",
+  "/room/create",
   tokenVerification,
   validation(checkSchema(roomSchemas.createRoom)),
   roomController.createRoom,
 );
-
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlJpamFsIFJ1YmkiLCJlbWFpbCI6ImV4YW1wbGVAZ21haWwuY29tIiwiaWF0IjoxNjYzODM3NTk2LCJleHAiOjE2NjM5MjM5OTZ9.r82duJ4hyAJgCQmwZOUW5feZFwgQP_eEgWj9xy4jkMw
 module.exports = roomRouter;

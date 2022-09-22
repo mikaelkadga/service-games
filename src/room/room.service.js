@@ -8,7 +8,8 @@ const createRoom = async ({ roomName, hostUserId }) => {
       });
       resolve(newRoom);
     } catch (e) {
-      const error = new Error("Failed while create a new post");
+      const error = new Error("Failed while create a new room");
+      console.log(e);
       error.code = 401;
       reject(error);
     }
