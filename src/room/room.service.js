@@ -29,9 +29,37 @@ const getAllRoom = async () => {
   });
 };
 
+const findRoom = async (roomId) => {
+  return new Promise(async (resolve, reject) => {
+    const room = await roomRepo.findRoom(roomId);
+    if (room) {
+      resolve(room);
+    } else {
+      const error = new Error("Room not exist");
+      error.code = 404;
+      reject(error);
+    }
+  });
+};
+
+const getRoomId = async ({ roomCode }) => {
+  return new Promise(async (resolve, reject) => {
+    const room = await roomRepo.findRoomWithCode({ roomCode });
+    if (room) {
+      resolve(room.roomId);
+    } else {
+      const error = new Error("Room not exist");
+      error.code = 404;
+      reject(error);
+    }
+  });
+};
+
 const roomService = {
   createRoom,
   getAllRoom,
+  findRoom,
+  getRoomId,
 };
 
 module.exports = roomService;

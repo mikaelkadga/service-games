@@ -21,10 +21,15 @@ const getAllRoom = async () => {
   return await Room.findAll();
 };
 
+const findRoom = async (roomId) => {
+  return await Room.findByPk(roomId);
+};
+
 const roomRepo = {
   findRoomWithCode,
   createRoom,
   getAllRoom,
+  findRoom,
 };
 
 module.exports = roomRepo;
