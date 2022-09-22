@@ -26,7 +26,7 @@ const login = async (req, res) => {
 
       return res.status(200).json({accessToken: token});
     } else {
-      return res.send("Login failed");
+      return res.status(500).json({msg: "Login failed"});
     }
   }
 
