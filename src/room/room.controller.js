@@ -44,11 +44,52 @@ const findRoom = async (req, res) => {
   }
 };
 
+const updateRoom = async (req, res) => {
+  const userId = req.auth.id;
+  const { roomId } = req.params;
+  const { selection = 0, isFinished = 0 } = req.body;
+  try {
+    const room = await roomService.findRoom(roomId);
+
+    if(room.hostUserId == userId){
+      room.hostSelection = selection;
+    }else{
+      if(room.guestUserId == null) room.guestUserId = userId;
+      room.guestSelection = selection;
+    }
+    
+    if(room.hostSelection != 0 && room.guestSelection != 0){
+      //1 : rock, 2: paper, 3: scissor
+      if(room.hostSelection == room.guestSelection){
+        // Draw
+        room.hostSelection = 0;        
+        room.guestSelection = 0;
+      }else if(room.hostSelection == 1 && room.guestSelection == 3 || 
+               room.hostSelection == 2 && room.guestSelection == 1 ||
+               room.hostSelection == 3 && room.guestSelection == 2 ){
+        // Host win
+        room.hostScore = room.hostScore + 1;
+      }else if(room.hostSelection == 1 && room.guestSelection == 2 || 
+               room.hostSelection == 2 && room.guestSelection == 3 ||
+               room.hostSelection == 3 && room.guestSelection == 1 ){
+        // Guest win
+        room.guestScore = room.guestScore + 1;
+      }
+    }
+    // const post = await roomService.updateRoom(roomId, room.guestUserId, room.hostScore, room.guestScore, room.hostSelection, room.guestSelection, isFinished);
+    const post = await roomService.updateRoom(room);
+    return res.json(post);
+  } catch (e) {
+    res.status(e.code).send(e.message);
+  }
+};
+
 const roomController = {
   createRoom,
   getAllRoom,
   findRoom,
   getRoomId,
+  updateRoom
 };
 
 module.exports = roomController;

@@ -46,10 +46,25 @@ const getRoomId = async ({ roomCode }) => {
   return new Promise(async (resolve, reject) => {
     const room = await roomRepo.findRoomWithCode({ roomCode });
     if (room) {
-      resolve(room.roomId);
+      resolve(room.id);
     } else {
       const error = new Error("Room not exist");
       error.code = 404;
+      reject(error);
+    }
+  });
+};
+
+const updateRoom = async ({ room }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      return await roomRepo.updateRoom({
+        room
+      });
+    } catch (e) {
+      const error = new Error("Failed while update the room");
+      console.log(e);
+      error.code = 401;
       reject(error);
     }
   });
@@ -60,6 +75,7 @@ const roomService = {
   getAllRoom,
   findRoom,
   getRoomId,
+  updateRoom
 };
 
 module.exports = roomService;

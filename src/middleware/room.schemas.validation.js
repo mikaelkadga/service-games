@@ -6,8 +6,16 @@ const createRoom = {
   },
 };
 
+const updateRoom = {
+  roomId: {
+    notEmpty: true,
+    errorMessage: "roomId must be not empty",
+  }
+}
+
 const roomSchemas = {
   createRoom,
+  updateRoom
 };
 
 module.exports = roomSchemas;
