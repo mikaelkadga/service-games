@@ -26,7 +26,7 @@ app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('hi there')
-});
+})
 
 app.use(userRouter);
 app.use(authRouter);

@@ -3,7 +3,7 @@ const tokenVerification = require("../middleware/token.verification");
 const leaderboardController = require("./leaderboard.controller");
 const leaderboardRouter = express.Router();
 
-leaderboardRouter.get("/leaderboard", tokenVerification, leaderboardController.getAllUser)
+leaderboardRouter.get("/leaderboard", tokenVerification, leaderboardController.getAllUser);
 
 /**
  * @swagger
