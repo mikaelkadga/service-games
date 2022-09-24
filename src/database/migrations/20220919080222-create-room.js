@@ -41,6 +41,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
+      turn: {
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+      },
       isFinished: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
