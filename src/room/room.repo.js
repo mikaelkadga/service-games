@@ -16,23 +16,23 @@ const createRoom = async ({ room }) => {
   });
 };
 
-const updateRoom = async ( roomId, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished) => {
-  return await Room.update(
-    {
-      guestUserId,
-      hostScore,
-      guestScore,
-      hostSelection, 
-      guestSelection, 
-      isFinished
-    },
-    {
-      where: {
-        id: roomId,
-      },
-      returning: true,
-    }
-  );
+const updateRoom = async ( id, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished) => {
+  return await  Room.update(
+                  {
+                    guestUserId,
+                    hostScore,
+                    guestScore,
+                    hostSelection, 
+                    guestSelection, 
+                    isFinished
+                  },
+                  {
+                    where: {
+                      id,
+                    },                    
+                    returning : true,
+                  },
+                );
 };
 
 const getAllRoom = async () => {

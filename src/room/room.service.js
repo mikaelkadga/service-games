@@ -58,9 +58,16 @@ const getRoomId = async ({ roomCode }) => {
 const updateRoom = async ( roomId, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished ) => {
   return new Promise(async (resolve, reject) => {
     try {
-      return await roomRepo.updateRoom(
+      const room = await roomRepo.updateRoom(
         roomId, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished
       );
+      if (room) {
+        resolve(room);
+      } else {
+        const error = new Error("Room not exist");
+        error.code = 404;
+        reject(error);
+      }
     } catch (e) {
       const error = new Error("Failed while update the room");
       console.log(e);
