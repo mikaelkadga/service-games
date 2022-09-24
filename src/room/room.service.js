@@ -55,12 +55,12 @@ const getRoomId = async ({ roomCode }) => {
   });
 };
 
-const updateRoom = async ({ room }) => {
+const updateRoom = async ( roomId, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished ) => {
   return new Promise(async (resolve, reject) => {
     try {
-      return await roomRepo.updateRoom({
-        room
-      });
+      return await roomRepo.updateRoom(
+        roomId, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished
+      );
     } catch (e) {
       const error = new Error("Failed while update the room");
       console.log(e);
