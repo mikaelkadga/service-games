@@ -23,6 +23,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+
+app.get('/', (req, res) => {
+  res.send('hi there')
+});
+
 app.use(userRouter);
 app.use(authRouter);
 app.use(leaderboardRouter)
