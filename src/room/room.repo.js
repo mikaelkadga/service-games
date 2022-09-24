@@ -7,8 +7,8 @@ const findRoomWithCode = async ({ roomCode }) => {
   );
 };
 
-const createRoom = async ({ room }) => {
-  console.log(roomCode);
+const createRoom = async ({ roomName, hostUserId }) => {
+  const roomCode = await generateRoomCode();
   return await Room.create({
     roomName,
     hostUserId,
@@ -16,23 +16,23 @@ const createRoom = async ({ room }) => {
   });
 };
 
-const updateRoom = async ( id, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished) => {
-  return await  Room.update(
-                  {
-                    guestUserId,
-                    hostScore,
-                    guestScore,
-                    hostSelection, 
-                    guestSelection, 
-                    isFinished
-                  },
-                  {
-                    where: {
-                      id,
-                    },                    
-                    returning : true,
-                  },
-                );
+const updateRoom = async (id, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished) => {
+  return await Room.update(
+    {
+      guestUserId,
+      hostScore,
+      guestScore,
+      hostSelection,
+      guestSelection,
+      isFinished,
+    },
+    {
+      where: {
+        id,
+      },
+      returning: true,
+    },
+  );
 };
 
 const getAllRoom = async () => {
