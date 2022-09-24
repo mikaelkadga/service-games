@@ -46,7 +46,7 @@ const getRoomId = async ({ roomCode }) => {
   return new Promise(async (resolve, reject) => {
     const room = await roomRepo.findRoomWithCode({ roomCode });
     if (room) {
-      resolve(room.roomId);
+      resolve(room.id);
     } else {
       const error = new Error("Room not exist");
       error.code = 404;
