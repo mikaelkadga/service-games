@@ -7,14 +7,32 @@ const findRoomWithCode = async ({ roomCode }) => {
   );
 };
 
-const createRoom = async ({ roomName, hostUserId }) => {
-  const roomCode = await generateRoomCode();
+const createRoom = async ({ room }) => {
   console.log(roomCode);
   return await Room.create({
     roomName,
     hostUserId,
     roomCode,
   });
+};
+
+const updateRoom = async ( id, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished) => {
+  return await  Room.update(
+                  {
+                    guestUserId,
+                    hostScore,
+                    guestScore,
+                    hostSelection, 
+                    guestSelection, 
+                    isFinished
+                  },
+                  {
+                    where: {
+                      id,
+                    },                    
+                    returning : true,
+                  },
+                );
 };
 
 const getAllRoom = async () => {
@@ -30,6 +48,7 @@ const roomRepo = {
   createRoom,
   getAllRoom,
   findRoom,
+  updateRoom,
 };
 
 module.exports = roomRepo;

@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     guestUserId: DataTypes.INTEGER,
     hostScore: DataTypes.INTEGER,
     guestScore: DataTypes.INTEGER,
+    hostSelection: DataTypes.INTEGER,
+    guestSelection: DataTypes.INTEGER,
     isFinished: DataTypes.BOOLEAN
   }, {
     sequelize,

@@ -33,6 +33,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
+      hostSelection: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      guestSelection: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       isFinished: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
