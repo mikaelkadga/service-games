@@ -21,8 +21,16 @@ leaderboardRouter.get("/leaderboard", tokenVerification, leaderboardController.g
  *          content:
  *            application/json:
  *              schema:
- *                type: string
- *                example: JSKDN
+ *                type: object
+ *                  fullname:
+ *                    type: string
+ *                    example: Potter
+ *                  totalPoint:
+ *                    type: integer
+ *                    example: 12345
+ *                   userId:
+ *                      type: integer
+ *                      example: 239
  *        '400':
  *          description: Missing Authorization header
  *          content:
