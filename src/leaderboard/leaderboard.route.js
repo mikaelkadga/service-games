@@ -11,7 +11,7 @@ leaderboardRouter.get("/leaderboard", tokenVerification, leaderboardController.g
  *    post:
  *      security:
  *        - bearerAuth: []
- *      summary: Create a room
+ *      summary: Get high score list
  *      description: this api is used to get user total point 
  *      tags:
  *        - Leaderboard
