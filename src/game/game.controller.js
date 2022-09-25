@@ -11,8 +11,32 @@ const fetchGame = async (req, res) => {
   }
 };
 
+const hostWinRound = async (req, res) => {
+  const { roomId } = req.body;
+
+  try {
+    await gameService.hostWinRound({ roomId });
+    return res.send("success");
+  } catch (e) {
+    return res.status(e.code).send(e.message);
+  }
+};
+
+const guestWinRound = async (req, res) => {
+  const { roomId } = req.body;
+
+  try {
+    await gameService.guestWinRound({ roomId });
+    return res.send("success");
+  } catch (e) {
+    return res.status(e.code).send(e.message);
+  }
+};
+
 const gameController = {
-  fetchGame
+  fetchGame,
+  hostWinRound,
+  guestWinRound,
 };
 
 module.exports = gameController;

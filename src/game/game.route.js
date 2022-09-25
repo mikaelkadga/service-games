@@ -93,4 +93,134 @@ gameRouter.get(
   gameController.fetchGame,
 );
 
+/**
+ * @swagger
+ *  /game/host-win:
+ *    put:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: Handle when host user win the round
+ *      description: Increment both the hostScore and turn value in database
+ *      tags:
+ *        - Game
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - roomId
+ *              properties:
+ *                roomId:
+ *                  type: integer
+ *                  example: 1
+ *      responses:
+ *        '200':
+ *          description: Success
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Success
+ *        '400':
+ *          description: Missing Authorization header
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Missing Authorization header
+ *        '401':
+ *          description: Invalid token
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Invalid token
+ *        '404':
+ *          description: Room not exist
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Room not exist
+ *        '500':
+ *          description: Internal server error
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Internal server error
+ */
+gameRouter.put(
+  "/game/host-win",
+  tokenVerification,
+  gameController.hostWinRound,
+);
+
+/**
+ * @swagger
+ *  /game/guest-win:
+ *    put:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: Handle when guest user win the round
+ *      description: Increment both the guestScore and turn value in database
+ *      tags:
+ *        - Game
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - roomId
+ *              properties:
+ *                roomId:
+ *                  type: integer
+ *                  example: 1
+ *      responses:
+ *        '200':
+ *          description: Success
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Success
+ *        '400':
+ *          description: Missing Authorization header
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Missing Authorization header
+ *        '401':
+ *          description: Invalid token
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Invalid token
+ *        '404':
+ *          description: Room not exist
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Room not exist
+ *        '500':
+ *          description: Internal server error
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Internal server error
+ */
+gameRouter.put(
+  "/game/guest-win",
+  tokenVerification,
+  gameController.guestWinRound,
+);
+
 module.exports = gameRouter;
