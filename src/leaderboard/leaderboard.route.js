@@ -22,6 +22,7 @@ leaderboardRouter.get("/leaderboard", tokenVerification, leaderboardController.g
  *            application/json:
  *              schema:
  *                type: object
+ *                properties:
  *                  fullname:
  *                    type: string
  *                    example: Potter
