@@ -33,10 +33,22 @@ const guestWinRound = async (req, res) => {
   }
 };
 
+const finishGame = async (req, res) => {
+  const { roomId } = req.body;
+
+  try {
+    await gameService.finishGame({ roomId });
+    return res.send("success");
+  } catch (e) {
+    return res.status(e.code).send(e.message);
+  }
+};
+
 const gameController = {
   fetchGame,
   hostWinRound,
   guestWinRound,
+  finishGame,
 };
 
 module.exports = gameController;

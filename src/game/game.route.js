@@ -223,4 +223,69 @@ gameRouter.put(
   gameController.guestWinRound,
 );
 
+/**
+ * @swagger
+ *  /game/finish:
+ *    put:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: Handle when the game has finished
+ *      description: This will set the game to finished and added the winner score to their total point if not draw.
+ *      tags:
+ *        - Game
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - roomId
+ *              properties:
+ *                roomId:
+ *                  type: integer
+ *                  example: 1
+ *      responses:
+ *        '200':
+ *          description: Success
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Success
+ *        '400':
+ *          description: Missing Authorization header
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Missing Authorization header
+ *        '401':
+ *          description: Invalid token
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Invalid token
+ *        '404':
+ *          description: Room not exist
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Room not exist
+ *        '500':
+ *          description: Internal server error
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Internal server error
+ */
+gameRouter.put(
+  "/game/finish",
+  tokenVerification,
+  gameController.finishGame,
+);
+
 module.exports = gameRouter;

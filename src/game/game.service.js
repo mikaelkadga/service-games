@@ -90,10 +90,53 @@ const guestWinRound = async ({ roomId }) => {
   });
 };
 
+const finishGame = async ({ roomId }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const prevRoom = await gameRepo.findRoom(roomId);
+
+      if (prevRoom) {
+        const editedRoom = await gameRepo.updateGame({
+          isFinished: true,
+        }, roomId);
+
+        const hostUser = await gameRepo.findUser(prevRoom.hostUserId);
+        const guestUser = await gameRepo.findUser(prevRoom.guestUserId);
+
+        if (prevRoom.hostUserId && prevRoom.guestUserId) {
+          if (prevRoom.hostScore > prevRoom.guestUserId && prevRoom.hostScore > 0) {
+            await gameRepo.updateUserPoint({
+              userId: hostUser.userId,
+              addedPoint: hostUser.totalPoint + prevRoom.hostScore,
+            });
+          } else if (prevRoom.guestScore > prevRoom.hostScore && prevRoom.guestUserId > 0) {
+            await gameRepo.updateUserPoint({
+              userId: guestUser.userId,
+              addedPoint: guestUser.totalPoint + prevRoom.guestScore,
+            });
+          }
+        }
+
+        resolve(editedRoom);
+      } else {
+        const error = new Error("Can't find the room");
+        error.code = 404;
+        reject(error);
+      }
+    } catch (e) {
+      console.log(e);
+      const error = new Error("Failed while updating a game room");
+      error.code = 500;
+      reject(error);
+    }
+  });
+};
+
 const gameService = {
   fetchGame,
   hostWinRound,
   guestWinRound,
+  finishGame,
 };
 
 module.exports = gameService;
