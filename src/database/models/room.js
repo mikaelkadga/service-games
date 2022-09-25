@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     guestScore: DataTypes.INTEGER,
     hostSelection: DataTypes.INTEGER,
     guestSelection: DataTypes.INTEGER,
+    turn: DataTypes.INTEGER,
     isFinished: DataTypes.BOOLEAN
   }, {
     sequelize,
