@@ -24,6 +24,7 @@ const updateRoom = async (id, guestUserId, hostScore, guestScore, hostSelection,
       guestScore,
       hostSelection,
       guestSelection,
+      turn,
       isFinished,
     },
     {
@@ -31,7 +32,7 @@ const updateRoom = async (id, guestUserId, hostScore, guestScore, hostSelection,
         id,
       },
       returning: true,
-    },
+    }
   );
 };
 

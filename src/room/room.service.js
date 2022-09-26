@@ -55,11 +55,27 @@ const getRoomId = async ({ roomCode }) => {
   });
 };
 
-const updateRoom = async ( roomId, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished ) => {
+const updateRoom = async (
+  roomId,
+  guestUserId,
+  hostScore,
+  guestScore,
+  hostSelection,
+  guestSelection,
+  turn,
+  isFinished
+) => {
   return new Promise(async (resolve, reject) => {
     try {
       const room = await roomRepo.updateRoom(
-        roomId, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished
+        roomId,
+        guestUserId,
+        hostScore,
+        guestScore,
+        hostSelection,
+        guestSelection,
+        turn,
+        isFinished
       );
       if (room) {
         resolve(room);
