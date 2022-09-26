@@ -47,7 +47,7 @@ const findRoom = async (req, res) => {
 const updateRoom = async (req, res) => {
   const userId = req.auth.id;
   const { roomId } = req.params;
-  const { selection, isFinished, turn } = req.body;
+  const { selection, turn } = req.body;
   try {
     const room = await roomService.findRoom(roomId);
 
@@ -79,6 +79,7 @@ const updateRoom = async (req, res) => {
         // Guest win
         room.guestScore = room.guestScore + 1;
       }
+      room.isFinished = true;
     }
 
     const post = await roomService.updateRoom(
@@ -88,8 +89,7 @@ const updateRoom = async (req, res) => {
       room.guestScore,
       room.hostSelection,
       room.guestSelection,
-      turn,
-      isFinished
+      turn
     );
     return res.json(post);
   } catch (e) {
