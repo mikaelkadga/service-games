@@ -11,7 +11,7 @@ leaderboardRouter.get("/leaderboard", tokenVerification, leaderboardController.g
  *    post:
  *      security:
  *        - bearerAuth: []
- *      summary: Create a room
+ *      summary: Get high score list
  *      description: this api is used to get user total point 
  *      tags:
  *        - Leaderboard
@@ -21,8 +21,19 @@ leaderboardRouter.get("/leaderboard", tokenVerification, leaderboardController.g
  *          content:
  *            application/json:
  *              schema:
- *                type: string
- *                example: JSKDN
+ *                type: array
+ *                items:
+ *                  type: object
+ *                  properties:
+ *                    fullname:
+ *                      type: string
+ *                      example: Potter
+ *                    totalPoint:
+ *                      type: integer
+ *                      example: 90088
+ *                    userId:
+ *                      type: integer
+ *                      example: 1234
  *        '400':
  *          description: Missing Authorization header
  *          content:
