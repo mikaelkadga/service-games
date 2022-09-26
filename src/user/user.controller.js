@@ -17,7 +17,6 @@ const createUser = async (req, res) => {
 };
 
 const getUserProfile = async (req, res) => {
-  console.log("test1");
   const userId = req.auth.id;
   try {
     const getUserProfile = await userService.getUserProfile({
@@ -25,7 +24,6 @@ const getUserProfile = async (req, res) => {
     });
     return res.status(200).json(getUserProfile);
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: "Internal server error!" });
   }
 };
