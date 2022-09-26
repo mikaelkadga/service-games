@@ -62,7 +62,8 @@ const updateRoom = async (
   guestScore,
   hostSelection,
   guestSelection,
-  turn
+  turn,
+  isFinished
 ) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -73,7 +74,8 @@ const updateRoom = async (
         guestScore,
         hostSelection,
         guestSelection,
-        turn
+        turn,
+        isFinished
       );
       if (room) {
         resolve(room);

@@ -89,7 +89,8 @@ const updateRoom = async (req, res) => {
       room.guestScore,
       room.hostSelection,
       room.guestSelection,
-      turn
+      turn,
+      room.isFinished
     );
     return res.json(post);
   } catch (e) {

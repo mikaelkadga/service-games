@@ -23,7 +23,8 @@ const updateRoom = async (
   guestScore,
   hostSelection,
   guestSelection,
-  turn
+  turn,
+  isFinished
 ) => {
   return await Room.update(
     {
@@ -33,6 +34,7 @@ const updateRoom = async (
       hostSelection,
       guestSelection,
       turn,
+      isFinished,
     },
     {
       where: {
