@@ -287,6 +287,19 @@ roomRouter.get(
  *              integer
  *            required: true
  *            description: The primary key of the room
+ *      requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              selection:
+ *                type: integer
+ *                example: 1
+ *              turn:
+ *                type: integer
+ *                example: 1
  *      responses:
  *        '200':
  *          description: Success
