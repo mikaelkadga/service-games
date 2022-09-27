@@ -18,7 +18,7 @@ const getUserProfile = async ({ userId }) => {
   });
 };
 
-const updateUser = async ({ fullname, email, password }) => {
+const updateUser = async ({ userId, fullname, email, password }) => {
   const hashPassword = await bcrypt.hash(password, saltRound);
   return await userRepo.updateUser({
     userId,
