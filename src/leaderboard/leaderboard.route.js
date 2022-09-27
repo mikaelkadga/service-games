@@ -8,7 +8,7 @@ leaderboardRouter.get("/leaderboard", tokenVerification, leaderboardController.g
 /**
  * @swagger
  *  /leaderboard:
- *    post:
+ *    get:
  *      security:
  *        - bearerAuth: []
  *      summary: Get high score list
