@@ -1,9 +1,18 @@
 const { Room } = require("../database/models");
 
-const findRoomWithCode = async ({ roomCode }) => {
-  return await Room.findOne({
-      where: { roomCode: roomCode },
+const findRoomWithCode = async ({ roomCode, userId }) => {
+  const room = await Room.findOne({
+    where: { roomCode: roomCode },
+  });
+  return await Room.update(
+    {
+      guestUserId: userId,
     },
+    {
+      where: {
+        id: room.id,
+      },
+    }
   );
 };
 

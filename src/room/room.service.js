@@ -42,11 +42,11 @@ const findRoom = async (roomId) => {
   });
 };
 
-const getRoomId = async ({ roomCode }) => {
+const updateJoinRoom = async ({ roomCode, userId }) => {
   return new Promise(async (resolve, reject) => {
-    const room = await roomRepo.findRoomWithCode({ roomCode });
+    const room = await roomRepo.findRoomWithCode({ roomCode, userId });
     if (room) {
-      resolve(room.id);
+      resolve(room);
     } else {
       const error = new Error("Room not exist");
       error.code = 404;
@@ -97,8 +97,8 @@ const roomService = {
   createRoom,
   getAllRoom,
   findRoom,
-  getRoomId,
-  updateRoom
+  updateJoinRoom,
+  updateRoom,
 };
 
 module.exports = roomService;

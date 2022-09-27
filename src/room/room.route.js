@@ -215,11 +215,11 @@ roomRouter.get(
 /**
  * @swagger
  *  /room/join/{roomCode}:
- *    get:
+ *    put:
  *      security:
  *        - bearerAuth: []
  *      summary: Join a room
- *      description: Returns the roomId for the given roomCode
+ *      description: Returns the roomId for the given roomCode (update column guest user id that joined the room)
  *      tags:
  *        - Room
  *      parameters:
@@ -263,10 +263,11 @@ roomRouter.get(
  *                type: string
  *                example: Room not exist
  */
-roomRouter.get(
+roomRouter.put(
   "/room/join/:roomCode",
   tokenVerification,
-  roomController.getRoomId);
+  roomController.updateJoinRoom
+);
 
   
 /**

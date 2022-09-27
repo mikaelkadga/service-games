@@ -23,11 +23,13 @@ const getAllRoom = async (req, res) => {
   }
 };
 
-const getRoomId = async (req, res) => {
+const updateJoinRoom = async (req, res) => {
+  const userId = req.auth.id;
+
   const { roomCode } = req.params;
   try {
-    const roomId = await roomService.getRoomId({roomCode});
-    return res.json({ roomId: roomId });
+    const room = await roomService.updateJoinRoom({ roomCode, userId });
+    return res.json({ room: room });
   } catch (e) {
     console.log(e);
     res.status(e.code).send(e.message);
@@ -102,8 +104,8 @@ const roomController = {
   createRoom,
   getAllRoom,
   findRoom,
-  getRoomId,
-  updateRoom
+  updateJoinRoom,
+  updateRoom,
 };
 
 module.exports = roomController;
