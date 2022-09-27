@@ -42,9 +42,9 @@ const findRoom = async (roomId) => {
   });
 };
 
-const updateJoinRoom = async ({ roomCode, guestUserId }) => {
+const getRoomId = async ({ roomCode }) => {
   return new Promise(async (resolve, reject) => {
-    const room = await roomRepo.findRoomWithCode({ roomCode, guestUserId });
+    const room = await roomRepo.findRoomWithCode({ roomCode });
     if (room) {
       resolve(room);
     } else {
@@ -93,12 +93,33 @@ const updateRoom = async (
   });
 };
 
+const updateGuestUser = async ({ id, guestUserId }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const room = await roomRepo.updateGuestUser({ id, guestUserId });
+      if (room) {
+        resolve(room);
+      } else {
+        const error = new Error("Room not exist");
+        error.code = 404;
+        reject(error);
+      }
+    } catch (e) {
+      const error = new Error("Failed while update the room");
+      console.log(e);
+      error.code = 401;
+      reject(error);
+    }
+  });
+};
+
 const roomService = {
   createRoom,
   getAllRoom,
   findRoom,
-  updateJoinRoom,
+  getRoomId,
   updateRoom,
+  updateGuestUser,
 };
 
 module.exports = roomService;
