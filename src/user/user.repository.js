@@ -35,7 +35,7 @@ const updateUser = async ({ userId, fullname, email, password }) => {
     },
     {
       where: {
-        id: userId,
+        userId: userId,
       },
       returning: true,
     }
