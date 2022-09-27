@@ -28,7 +28,10 @@ const updateJoinRoom = async (req, res) => {
 
   const { roomCode } = req.params;
   try {
-    const room = await roomService.updateJoinRoom({ roomCode, userId });
+    const room = await roomService.updateJoinRoom({
+      roomCode,
+      guestUserId: userId,
+    });
     return res.json({ room: room });
   } catch (e) {
     console.log(e);

@@ -42,9 +42,9 @@ const findRoom = async (roomId) => {
   });
 };
 
-const updateJoinRoom = async ({ roomCode, userId }) => {
+const updateJoinRoom = async ({ roomCode, guestUserId }) => {
   return new Promise(async (resolve, reject) => {
-    const room = await roomRepo.findRoomWithCode({ roomCode, userId });
+    const room = await roomRepo.findRoomWithCode({ roomCode, guestUserId });
     if (room) {
       resolve(room);
     } else {
