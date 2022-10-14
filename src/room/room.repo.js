@@ -2,9 +2,8 @@ const { Room } = require("../database/models");
 
 const findRoomWithCode = async ({ roomCode }) => {
   return await Room.findOne({
-      where: { roomCode: roomCode },
-    },
-  );
+    where: { roomCode: roomCode },
+  });
 };
 
 const createRoom = async ({ roomName, hostUserId }) => {
@@ -16,7 +15,16 @@ const createRoom = async ({ roomName, hostUserId }) => {
   });
 };
 
-const updateRoom = async (id, guestUserId, hostScore, guestScore, hostSelection, guestSelection, isFinished) => {
+const updateRoom = async (
+  id,
+  guestUserId,
+  hostScore,
+  guestScore,
+  hostSelection,
+  guestSelection,
+  turn,
+  isFinished
+) => {
   return await Room.update(
     {
       guestUserId,
@@ -24,6 +32,7 @@ const updateRoom = async (id, guestUserId, hostScore, guestScore, hostSelection,
       guestScore,
       hostSelection,
       guestSelection,
+      turn,
       isFinished,
     },
     {
@@ -31,7 +40,21 @@ const updateRoom = async (id, guestUserId, hostScore, guestScore, hostSelection,
         id,
       },
       returning: true,
+    }
+  );
+};
+
+const updateGuestUser = async ({ id, guestUserId }) => {
+  return await Room.update(
+    {
+      guestUserId,
     },
+    {
+      where: {
+        id,
+      },
+      returning: true,
+    }
   );
 };
 
@@ -49,6 +72,7 @@ const roomRepo = {
   getAllRoom,
   findRoom,
   updateRoom,
+  updateGuestUser,
 };
 
 module.exports = roomRepo;

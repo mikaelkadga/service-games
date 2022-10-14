@@ -25,9 +25,19 @@ const getAllRoom = async (req, res) => {
 
 const getRoomId = async (req, res) => {
   const { roomCode } = req.params;
+  const userId = req.auth.id;
+
   try {
-    const roomId = await roomService.getRoomId({roomCode});
-    return res.json({ roomId: roomId });
+    const room = await roomService.getRoomId({ roomCode });
+    console.log(room);
+    console.log(userId);
+    if (userId != room.hostUserId && room.guestUserId == null) {
+      await roomService.updateGuestUser({
+        id: room.id,
+        guestUserId: userId,
+      });
+    }
+    return res.json({ room: room });
   } catch (e) {
     console.log(e);
     res.status(e.code).send(e.message);
@@ -47,7 +57,7 @@ const findRoom = async (req, res) => {
 const updateRoom = async (req, res) => {
   const userId = req.auth.id;
   const { roomId } = req.params;
-  const { selection, isFinished } = req.body;
+  const { selection, turn } = req.body;
   try {
     const room = await roomService.findRoom(roomId);
 
@@ -79,6 +89,7 @@ const updateRoom = async (req, res) => {
         // Guest win
         room.guestScore = room.guestScore + 1;
       }
+      room.isFinished = true;
     }
 
     const post = await roomService.updateRoom(
@@ -88,7 +99,8 @@ const updateRoom = async (req, res) => {
       room.guestScore,
       room.hostSelection,
       room.guestSelection,
-      isFinished
+      turn,
+      room.isFinished
     );
     return res.json(post);
   } catch (e) {
@@ -101,7 +113,7 @@ const roomController = {
   getAllRoom,
   findRoom,
   getRoomId,
-  updateRoom
+  updateRoom,
 };
 
 module.exports = roomController;

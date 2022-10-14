@@ -7,6 +7,7 @@ const leaderboardRouter = require('./src/leaderboard/leaderboard.route');
 const userRouter = require("./src/user/user.route");
 const authRouter = require("./src/auth/auth.route");
 const roomRouter = require("./src/room/room.route")
+const gameRouter = require("./src/game/game.route")
 
 app.use(express.urlencoded({ extended: false }))
 
@@ -32,6 +33,7 @@ app.use(userRouter);
 app.use(authRouter);
 app.use(leaderboardRouter)
 app.use(roomRouter)
+app.use(gameRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);

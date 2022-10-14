@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
 const getUserProfile = async (req, res) => {
   const userId = req.auth.id;
   try {
-    const getUserProfile = await userService.getUser({
+    const getUserProfile = await userService.getUserProfile({
       userId,
     });
     return res.status(200).json(getUserProfile);
