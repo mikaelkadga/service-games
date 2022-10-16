@@ -64,7 +64,7 @@ const send = async (host, email) => {
           Click the link below to reset it. <br/>
           <a href="` + link +`">` + link +`</a> <br/>
           Your password won't change until you access link above and create a new one. 
-          This password reset is only valid for the next 48 hours. 
+          This password reset is only valid for the next 24 hours. 
           If you did not request this, please ignore this email. <br/><br/>
           Thank you, fe-chapter10-alpha`
       };

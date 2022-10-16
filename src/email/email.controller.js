@@ -1,10 +1,9 @@
 const emailService = require("./email.service");
 
 const send = async (req, res) => {
-  const { email } = req.body;
-  const host = req.header('Host');
+  const { url, email } = req.body;
   try {
-    await emailService.send(host, email);
+    await emailService.send(url, email);
     return res.send("success");
   } catch (e) {
     return res.status(e.code).send(e.message);
