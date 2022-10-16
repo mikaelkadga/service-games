@@ -2,11 +2,10 @@ const userRepo = require("./user.repository");
 const bcrypt = require("bcrypt");
 const saltRound = 10;
 
-const createUser = async ({ username, fullname, email, password }) => {
+const createUser = async ({ fullname, email, password }) => {
   const hashPassword = await bcrypt.hash(password, saltRound);
 
   return await userRepo.createUser({
-    username,
     fullname,
     email,
     password: hashPassword,
@@ -19,12 +18,20 @@ const getUserProfile = async ({ userId }) => {
   });
 };
 
-const updateUser = async ({ fullName, email, password }) => {
+const updateUser = async ({ userId, fullname, email, password }) => {
   const hashPassword = await bcrypt.hash(password, saltRound);
   return await userRepo.updateUser({
     userId,
-    fullName,
+    fullname,
     email,
+    password: hashPassword,
+  });
+};
+
+const resetPassword = async ({ userId, password, confirmpassword }) => {
+  const hashPassword = await bcrypt.hash(password, saltRound);
+  return await userRepo.updatePassword({
+    userId,
     password: hashPassword,
   });
 };
@@ -33,6 +40,7 @@ const userService = {
   createUser,
   getUserProfile,
   updateUser,
+  resetPassword
 };
 
 module.exports = userService;

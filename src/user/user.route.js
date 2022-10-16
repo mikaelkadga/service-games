@@ -22,9 +22,6 @@ const schemas = require("../middleware/schemas.validation");
  *          schema:
  *            type: object
  *            properties:
- *              username:
- *                type: string
- *                example: rijalrubi
  *              fullname:
  *                type: string
  *                example: Rijal Rubi
@@ -44,9 +41,6 @@ const schemas = require("../middleware/schemas.validation");
  *                id:
  *                  type: integer
  *                  example: 1
- *                username:
- *                  type: string
- *                  example: rijalrubio
  *                fullname:
  *                  type: string
  *                  example: Rijal Rubi
@@ -90,6 +84,13 @@ userRouter.put(
   tokenVerification,
   validation(checkSchema(schemas.updateUser)),
   userController.updateUser
+)
+
+userRouter.post(
+  "/user/resetpassword",
+  tokenVerification,
+  validation(checkSchema(schemas.resetPassword)),
+  userController.resetPassword
 )
 
 module.exports = userRouter;
