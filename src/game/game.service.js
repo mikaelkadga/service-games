@@ -1,7 +1,6 @@
 const gameRepo = require("./game.repo");
 
 const fetchGame = async (roomId) => {
-  console.log("called");
   return new Promise(async (resolve, reject) => {
     try {
       const room = await gameRepo.findRoom(roomId);
@@ -11,7 +10,6 @@ const fetchGame = async (roomId) => {
 
         if (host) {
           room.dataValues.hostUserName = host.fullname;
-          console.log(room);
         } else {
           room.dataValues.hostUserName = "";
         }
@@ -38,7 +36,6 @@ const fetchGame = async (roomId) => {
 };
 
 const hostWinRound = async ({ roomId }) => {
-  console.log(roomId);
   return new Promise(async (resolve, reject) => {
     try {
       const prevRoom = await gameRepo.findRoom(roomId);
@@ -63,6 +60,27 @@ const hostWinRound = async ({ roomId }) => {
     }
   });
 };
+
+const updateGame = ({roomId, updatedValues}) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const prevRoom = await gameRepo.findRoom(roomId);
+
+      if (prevRoom) {
+        const editedRoom = await gameRepo.updateGame(updatedValues, roomId);
+        resolve(editedRoom);
+      } else {
+        const error = new Error("Can't find the room");
+        error.code = 404;
+        reject(error);
+      }
+    } catch (e) {
+      const error = new Error("Failed while updating a game room");
+      error.code = 500;
+      reject(error);
+    }
+  })
+}
 
 const guestWinRound = async ({ roomId }) => {
   return new Promise(async (resolve, reject) => {
@@ -137,6 +155,7 @@ const gameService = {
   hostWinRound,
   guestWinRound,
   finishGame,
+  updateGame
 };
 
 module.exports = gameService;

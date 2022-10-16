@@ -288,4 +288,10 @@ gameRouter.put(
   gameController.finishGame,
 );
 
+gameRouter.put(
+  "/game/update",
+  tokenVerification,
+  gameController.updateGame,
+);
+
 module.exports = gameRouter;
