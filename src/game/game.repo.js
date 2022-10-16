@@ -10,11 +10,13 @@ const findRoom = async (roomId) => {
 };
 
 const updateGame = async (updatedValue, roomId) => {
-  const room = await Room.update(updatedValue, {
+  await Room.update(updatedValue, {
     where: {
       id: roomId,
     },
   });
+
+  const room = await findRoom(roomId);
   return room;
 };
 
@@ -23,7 +25,7 @@ const updateUserPoint = async ({ userId, addedPoint }) => {
     totalPoint: addedPoint,
   }, {
     where: {
-      id: userId,
+      userId,
     },
   });
   return user;

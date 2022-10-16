@@ -44,11 +44,27 @@ const finishGame = async (req, res) => {
   }
 };
 
+const updateGame = async (req, res) => {
+  const { roomId, updatedValues } = req.body;
+  console.log(updatedValues);
+
+  try {
+    const newRoom = await gameService.updateGame({
+      roomId,
+      updatedValues,
+    });
+    return res.send(newRoom);
+  } catch (e) {
+    return res.status(e.code).send(e.message);
+  }
+};
+
 const gameController = {
   fetchGame,
   hostWinRound,
   guestWinRound,
   finishGame,
+  updateGame,
 };
 
 module.exports = gameController;
