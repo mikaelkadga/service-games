@@ -28,10 +28,19 @@ const updateUser = async ({ userId, fullname, email, password }) => {
   });
 };
 
+const resetPassword = async ({ userId, password, confirmpassword }) => {
+  const hashPassword = await bcrypt.hash(password, saltRound);
+  return await userRepo.updatePassword({
+    userId,
+    password: hashPassword,
+  });
+};
+
 const userService = {
   createUser,
   getUserProfile,
   updateUser,
+  resetPassword
 };
 
 module.exports = userService;

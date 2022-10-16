@@ -69,10 +69,33 @@ const updateUser = {
   },
 };
 
+const resetPassword = {
+  password: {
+    isString: true,
+    notEmpty: true,
+    isStrongPassword: {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    },
+    errorMessage:
+      "Password setidaknya mengandung minimal 8 character dan minimal 1 huruf kapital dan 1 angka dan 1 symbol.",
+  },
+  confirmpassword: {
+    isString: true,
+    notEmpty: true,
+    errorMessage:
+    "Confirm password",
+  }
+};
+
 const schemas = {
   registrationSchema,
   updateUser,
-  loginSchema
+  loginSchema,
+  resetPassword
 };
 
 module.exports = schemas;

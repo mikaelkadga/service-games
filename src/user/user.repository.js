@@ -42,12 +42,27 @@ const updateUser = async ({ userId, fullname, email, password }) => {
   );
 };
 
+const updatePassword = async ({ userId, password }) => {
+  return await User.update(
+    {
+      password
+    },
+    {
+      where: {
+        userId: userId,
+      },
+      returning: true,
+    }
+  );
+};
+
 const userRepository = {
   createUser,
   getUser,
   getUserEmail,
   getUserProfile,
   updateUser,
+  updatePassword,
 };
 
 module.exports = userRepository;

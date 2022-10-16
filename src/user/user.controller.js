@@ -44,10 +44,25 @@ const updateUser = async (req, res) => {
   }
 };
 
+const resetPassword = async (req, res) => {
+  const { password, confirmpassword } = req.body;
+  if(password != confirmpassword){
+    return res.status(400).json({ message: "Password is not matched"});
+  }
+  const userId = req.auth.payload.id;
+  try {
+    const resetPassword = await userService.resetPassword({userId, password, confirmpassword});
+    return res.status(200).json(resetPassword);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error!" });
+  }
+};
+
 const userController = {
   createUser,
   getUserProfile,
   updateUser,
+  resetPassword
 };
 
 module.exports = userController;

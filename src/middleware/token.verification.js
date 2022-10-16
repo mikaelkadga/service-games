@@ -11,7 +11,7 @@ const tokenVerification = async (req, res, next) => {
 
   try {
     // cek token dan masukkan data user dalam request
-    const user = await jwt.verify(token, process.env.JWT_SECRET_TOKEN);
+    const user = await jwt.verify(token, process.env.JWT_SECRET_TOKEN); 
     req.auth = user;
     next();
   } catch (error) {

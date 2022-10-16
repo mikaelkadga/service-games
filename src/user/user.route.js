@@ -86,4 +86,11 @@ userRouter.put(
   userController.updateUser
 )
 
+userRouter.post(
+  "/user/resetpassword",
+  tokenVerification,
+  validation(checkSchema(schemas.resetPassword)),
+  userController.resetPassword
+)
+
 module.exports = userRouter;
