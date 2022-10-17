@@ -123,14 +123,16 @@ const finishGame = async ({ roomId }) => {
 
         if (prevRoom.hostUserId && prevRoom.guestUserId) {
           if (prevRoom.hostScore > prevRoom.guestUserId && prevRoom.hostScore > 0) {
+            const newScore = hostUser.totalPoint + prevRoom.hostScore;
             await gameRepo.updateUserPoint({
               userId: hostUser.userId,
-              addedPoint: hostUser.totalPoint + prevRoom.hostScore,
+              addedPoint: newScore,
             });
           } else if (prevRoom.guestScore > prevRoom.hostScore && prevRoom.guestUserId > 0) {
+            const newScore = guestUser.totalPoint + prevRoom.guestScore;
             await gameRepo.updateUserPoint({
               userId: guestUser.userId,
-              addedPoint: guestUser.totalPoint + prevRoom.guestScore,
+              addedPoint: newScore,
             });
           }
         }
