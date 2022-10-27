@@ -23,7 +23,12 @@ module.exports = (sequelize, DataTypes) => {
     hostSelection: DataTypes.INTEGER,
     guestSelection: DataTypes.INTEGER,
     turn: DataTypes.INTEGER,
-    isFinished: DataTypes.BOOLEAN
+    isFinished: DataTypes.BOOLEAN,
+    isHostWantReplay: DataTypes.BOOLEAN,
+    isGuestWantReplay: DataTypes.BOOLEAN,
+    isHostWinRound: DataTypes.BOOLEAN,
+    isGuestWinRound: DataTypes.BOOLEAN,
+    isTurnFinished: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Room',

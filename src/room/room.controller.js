@@ -29,8 +29,6 @@ const getRoomId = async (req, res) => {
 
   try {
     const room = await roomService.getRoomId({ roomCode });
-    console.log(room);
-    console.log(userId);
     if (userId != room.hostUserId && room.guestUserId == null) {
       await roomService.updateGuestUser({
         id: room.id,
