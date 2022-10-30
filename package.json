@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev:start": "nodemon server.js"
+    "dev:start": "nodemon server.js",
+    "pretest": "NODE_ENV=test npx sequelize-cli db:migrate:undo:all && NODE_ENV=test npx sequelize-cli db:migrate",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -36,5 +38,9 @@
     "sib-api-v3-sdk": "^8.4.2",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "jest": "^29.2.2"
   }
 }
