@@ -10,7 +10,7 @@ const createUser = async ({ fullname, email, password }) => {
       password,
     });
   } else {
-    return json({ message: "error.message" });
+    return new Error("This email address is already used");
   }
 };
 

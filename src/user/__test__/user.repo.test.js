@@ -15,15 +15,22 @@ const testData = {
 }
 
 
+
 describe('user.repo.test', () => {
     describe('createUser', () => {
         it('should return new user', async () => {
             const result = await createUser(testData);
-            console.log(result.fullname)
-            expect(result.fullname).toBe(testData.fullname);
-            expect(result.email).toBe(testData.email);
-            expect(result.password).toBe(testData.password);
-
+            expect(result).toEqual(
+                expect.objectContaining({
+                  fullname: result.fullname,
+                  email: result.email,
+                  password: result.password
+                })
+              );
+        });
+        it('should return error', async () => {
+            const result = await createUser(testData);
+            expect(result.message).toBe('This email address is already used');
         });
     });
 
@@ -51,14 +58,15 @@ describe('user.repo.test', () => {
     describe('updateUser', () => {
         it('should update user`s data', async () => {
             const result = await updateUser({userId: 1, fullname: testData.fullname, email: testData.email, password: testData.password})
-            expect(result.fullname).toBe(testData.fullname)
+            expect(result[0]).toEqual(1);
+            expect(result[1][0].fullname).toBe(testData.fullname)
         });
     });
 
     describe('updatePassword', () => {
         it('should update user`s password', async () => {
             const result = await updatePassword({userId: 1, password: testData.password})
-            expect(result.fullname).toBe(testData.fullname)
+            expect(result[1][0].password).toBe(testData.password)
         });
     });
 });
