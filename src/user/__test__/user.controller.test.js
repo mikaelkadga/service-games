@@ -18,7 +18,7 @@ const fakeData = {
 }
 
 
-describe("userController", () => {
+describe("user.controller.test", () => {
     describe("createUser", () => {
         it("should return created user", async () => {
             userService.createUser = jest.fn();
