@@ -80,8 +80,8 @@ describe('room.repo.test', () => {
     describe('findRoom', () => {
         it('should return a specific room', async () => {
             const result = await findRoom(roomTest.id);
-            expect(result).toEqual(
-                expect.objectContaining(roomTest)
+            expect(roomTest).toEqual(
+                expect.objectContaining(result)
               );
         });
     });
