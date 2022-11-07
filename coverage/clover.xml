@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1667846320187" clover="3.2.0">
-  <project timestamp="1667846320187" name="All files">
-    <metrics statements="261" coveredstatements="238" conditionals="53" coveredconditionals="39" methods="49" coveredmethods="47" elements="363" coveredelements="324" complexity="0" loc="261" ncloc="261" packages="5" files="13" classes="13"/>
+<coverage generated="1667846714811" clover="3.2.0">
+  <project timestamp="1667846714811" name="All files">
+    <metrics statements="261" coveredstatements="239" conditionals="53" coveredconditionals="39" methods="49" coveredmethods="47" elements="363" coveredelements="325" complexity="0" loc="261" ncloc="261" packages="5" files="13" classes="13"/>
     <package name="database.config">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="config.js" path="/Users/mikael-pc/Desktop/binar/service-games/src/database/config/config.js">
@@ -52,15 +52,15 @@
       </file>
     </package>
     <package name="leaderboard">
-      <metrics statements="19" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <file name="leaderboard.controller.js" path="/Users/mikael-pc/Desktop/binar/service-games/src/leaderboard/leaderboard.controller.js">
-        <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
       </file>
